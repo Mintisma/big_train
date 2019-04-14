@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/../.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/finsen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/funNLP" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/news_sentiment" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/resouces4dev/finsen" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/resouces4dev/funNLP" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/resouces4dev/news_sentiment" vcs="Git" />
+  </component>
+</project>
