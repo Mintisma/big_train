@@ -94,7 +94,7 @@ MYSQL_HOST = 'localhost'
 MYSQL_DATABASE = 'big_train'
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'zz6901877'
+MYSQL_PASSWORD = '*******77'
 
 
 RANDOM_UA_TYPE = 'chrome'
