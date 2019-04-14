@@ -13,7 +13,7 @@ def get_data(company):
     :param time: time precised to date, e.g. 2019-04-10.
     :return:
     """
-    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='zz6901877', db='big_train',
+    conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='*******77', db='big_train',
                                charset="utf8", use_unicode=True)
     cursor = conn.cursor()
     sql = 'select title, content from sina_new WHERE company = "{company}" and type="news" and date<CURRENT_DATE AND ' \
