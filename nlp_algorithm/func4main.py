@@ -1,4 +1,5 @@
 import multiprocessing
+from concurrent.futures import ProcessPoolExecutor, as_completed
 
 import pymysql
 import numpy as np
@@ -16,8 +17,8 @@ def get_data(company):
     conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='*******77', db='big_train',
                                charset="utf8", use_unicode=True)
     cursor = conn.cursor()
-    sql = 'select title, content from sina_new WHERE company = "{company}" and type="news" and date<CURRENT_DATE AND ' \
-          'date>(CURRENT_DATE -7) and LENGTH(content)>30'.format(company=company)
+    sql = 'select title, content from sina_new WHERE company = "{company}" and type="news" and date<=CURRENT_DATE AND ' \
+          'date>=(CURRENT_DATE -7) and LENGTH(content)>30'.format(company=company)
     cursor.execute(sql)
     results = cursor.fetchall()
     return results
@@ -47,22 +48,18 @@ def senti_day(company):
     results = get_data(company)
 
     if len(results) == 0:
-        # return 'no data for {}'.format(company)
-        return 0
-    pool = multiprocessing.Pool()
-
-    temp = []
-    for result in results:
-        temp.append(pool.apply_async(senti_doc, (result,)))
-
-    pool.close()
-    pool.join()
+        result = (company, 0)
+        return result
 
     scores = []
-    for item in temp:
-        scores.append(item.get())
+    with ProcessPoolExecutor() as executor:
+        futures = [executor.submit(senti_doc, (result)) for result in results]
+        for future in as_completed(futures):
+            scores.append(future.result())
+
     score = int(np.array(scores).mean())
-    return score
+    result = (company, score)
+    return result
 
 
 def fix_scores(scores):
